@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        
+        
+        
+        <link rel="shortcut icon" href="../../../img/favicon.ico">
+
+	<title>Body - MicronJS</title>
+
+        <link href="../../../css/bootstrap-custom.min.css" rel="stylesheet">
+        <link href="../../../css/font-awesome-4.0.3.css" rel="stylesheet">
+        <link href="../../../css/prettify-1.0.css" rel="stylesheet">
+        <link href="../../../css/base.css" rel="stylesheet">
+        <link href="../../../theme/css/custom.css" rel="stylesheet">
+
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+        <![endif]-->
+    </head>
+
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+
+        <!-- Collapsed navigation -->
+        <div class="navbar-header">
+            <!-- Expander button -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+
+            <!-- Main title -->
+            <a href="../../.." class="pull-left" style="margin-right: 3px">
+                <img src="../../../img/icon_small.png" alt="MicronJS" />
+            </a>
+            <a class="navbar-brand" href="../../..">MicronJS</a>
+        </div>
+
+        <!-- Expanded navigation -->
+        <div class="navbar-collapse collapse">
+            <!-- Main navigation -->
+            <ul class="nav navbar-nav">
+                <li>
+                    <a href="../../../editor">
+                        Editor
+                    </a>
+                </li>
+                <li>
+                    <a href="https://github.com/micronjs/micronjs/wiki">
+                        Wiki
+                    </a>
+                </li>
+            </ul>
+
+            <!-- Search, Navigation and Repo links -->
+            <ul class="nav navbar-nav navbar-right">
+                
+                <li >
+                <a rel="next" href="../physics/">
+                <i class="fa fa-arrow-left"></i> Previous
+                </a>
+                </li>
+                <li >
+                <a rel="prev" href="../../animation/animkey/">
+                Next <i class="fa fa-arrow-right"></i>
+                </a>
+                </li>
+                
+                <li>
+                    <a href="https://github.com/micronjs/micronjs">
+                        
+                        <i class="fa fa-github"></i>
+                        
+                        GitHub
+                    </a>
+                </li>
+                
+            </ul>
+        </div>
+    </div>
+</div>
+
+        <div class="toc"><ul class="toctree-wrapper current">
+    
+        
+            <li class="toctree-l1 ">
+                <a class="" href="../../..">Home</a>
+                
+            </li>
+        
+    
+        
+            <span>Core</span>
+            
+                <li class="toctree-l2 ">
+                    <a class="" href="../../core/core/">Core</a>
+                    
+                </li>
+            
+                <li class="toctree-l2 ">
+                    <a class="" href="../../core/state/">State</a>
+                    
+                </li>
+            
+                <li class="toctree-l2 ">
+                    <a class="" href="../../core/entity/">Entity</a>
+                    
+                </li>
+            
+                <li class="toctree-l2 ">
+                    <a class="" href="../../core/pool/">Pool</a>
+                    
+                </li>
+            
+        
+    
+        
+            <li class="toctree-l1 ">
+                <a class="" href="../../input/">Input</a>
+                
+            </li>
+        
+    
+        
+            <span>Graphics</span>
+            
+                <li class="toctree-l2 ">
+                    <a class="" href="../../graphics/graphics/">Graphics</a>
+                    
+                </li>
+            
+                <li class="toctree-l2 ">
+                    <a class="" href="../../graphics/camera/">Camera</a>
+                    
+                </li>
+            
+                <li class="toctree-l2 ">
+                    <a class="" href="../../graphics/sprite/">Sprite</a>
+                    
+                </li>
+            
+                <li class="toctree-l2 ">
+                    <a class="" href="../../graphics/atlas/">Atlas</a>
+                    
+                </li>
+            
+                <li class="toctree-l2 ">
+                    <a class="" href="../../graphics/label/">Label</a>
+                    
+                </li>
+            
+                <li class="toctree-l2 ">
+                    <a class="" href="../../graphics/button/">Button</a>
+                    
+                </li>
+            
+                <li class="toctree-l2 ">
+                    <a class="" href="../../graphics/particlebase/">Pariclebase</a>
+                    
+                </li>
+            
+                <li class="toctree-l2 ">
+                    <a class="" href="../../graphics/particlecircle/">ParticleCircle</a>
+                    
+                </li>
+            
+                <li class="toctree-l2 ">
+                    <a class="" href="../../graphics/particlesystem/">ParticleSystem</a>
+                    
+                </li>
+            
+        
+    
+        
+            <span>Physics</span>
+            
+                <li class="toctree-l2 ">
+                    <a class="" href="../physics/">Physics</a>
+                    
+                </li>
+            
+                <li class="toctree-l2 current">
+                    <a class="current" href="./">Body</a>
+                    
+                        <ul>
+                        
+                            <li class="toctree-l3"><a href="#body-entity"> Body : Entity</a></li>
+                            
+                                <li><a class="toctree-l4" href="#members">Members</a></li>
+                            
+                                <li><a class="toctree-l4" href="#methods">Methods</a></li>
+                            
+                        
+                        </ul>
+                    
+                </li>
+            
+        
+    
+        
+            <span>Animation</span>
+            
+                <li class="toctree-l2 ">
+                    <a class="" href="../../animation/animkey/">AnimKey</a>
+                    
+                </li>
+            
+                <li class="toctree-l2 ">
+                    <a class="" href="../../animation/animkeycall/">AnimKeyCall</a>
+                    
+                </li>
+            
+                <li class="toctree-l2 ">
+                    <a class="" href="../../animation/animclip/">AnimClip</a>
+                    
+                </li>
+            
+                <li class="toctree-l2 ">
+                    <a class="" href="../../animation/animator/">Animator</a>
+                    
+                </li>
+            
+        
+    
+        
+            <span>Sound</span>
+            
+                <li class="toctree-l2 ">
+                    <a class="" href="../../sound/sound/">Sound</a>
+                    
+                </li>
+            
+                <li class="toctree-l2 ">
+                    <a class="" href="../../sound/song/">Song</a>
+                    
+                </li>
+            
+        
+    
+        
+            <li class="toctree-l1 ">
+                <a class="" href="../../utils/">Utils</a>
+                
+            </li>
+        
+    
+</ul>
+</div>
+
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-9 col-md-offset-3" role="main">
+
+<h1 id="body-entity"><i class="fa fa-book"></i> Body : Entity</h1>
+<p><span class="label label-info">Class</span></p>
+<p>A very simple 2d "rigid" body.</p>
+<p>While the physics system presented in micron is extremely simple (there are no joints for example nor rotations),
+each body behaves as a rigid body. It can be <strong>solid</strong> (things collide with it) or <strong>dynamic</strong> (forces affect it, like velocity
+or collisions with other objects). Non solid objects will be moved through others, and non dynamic cannot react to forces (like
+velocity or gravity).</p>
+<p>Furthermore, each object belongs to a given "collision group". Each object can set one callback to interact with each different
+group, and it is possible to set a collision with its own group. Whether the object is solid/passable, dynamic/static, the callback
+will be triggered. It is also possible to skip groups to avoid all callbacks and collision info whatsoever.</p>
+<p>Setting the <strong>velocity</strong> manually works, as well as using <strong>addImpulse*. However the latter uses the mass. </strong>Friction<strong> is used both
+for "air friction" and friction against objects (for now). </strong>Elasticity<strong> controls how much "bounciness" an object has when colliding
+with another. </strong>Mass** is also important to determine how much objects bounce with each other.</p>
+<hr />
+<h2 id="members">Members</h2>
+<hr />
+<h3 id="group">group</h3>
+<pre><code>group : String
+</code></pre>
+<p>"default" is the default value.</p>
+<hr />
+<h3 id="type">type</h3>
+<pre><code>type
+</code></pre>
+<p>V_AABB by default (a rectangle).</p>
+<hr />
+<h3 id="x">x</h3>
+<pre><code>x : Number
+</code></pre>
+<p>The position of the body.</p>
+<p><strong>WARNING</strong>: in the physics module, the position is <strong>AT THE CENTER OF THE OBJECT</strong>, and not the top left corner.</p>
+<hr />
+<h3 id="y">y</h3>
+<pre><code>y : Number
+</code></pre>
+<p>Idem above.</p>
+<hr />
+<h3 id="w">w</h3>
+<pre><code>w : Number
+</code></pre>
+<p>Width of the object. Used for AABB vs AABB and AABB vs Circle.</p>
+<hr />
+<h3 id="h">h</h3>
+<pre><code>h : Number
+</code></pre>
+<p>Height of the object.</p>
+<hr />
+<h3 id="extents">extents</h3>
+<pre><code>extents : { x: 0.5, y: 0.5 }
+</code></pre>
+<p>Half the size in each axis.</p>
+<hr />
+<h3 id="radius">radius</h3>
+<pre><code>radius : Number
+</code></pre>
+<p>Used only when type === V_SPHERE.</p>
+<hr />
+<h3 id="mass">mass</h3>
+<pre><code>mass : Number
+</code></pre>
+<hr />
+<h3 id="elasticity">elasticity</h3>
+<pre><code>elasticity : Number
+</code></pre>
+<p>1.0 or bigger means a very "jumpy" object. Less than 1.0 means a less "reactive" object.</p>
+<hr />
+<h3 id="friction">friction</h3>
+<pre><code>friction : Number
+</code></pre>
+<p>Use wisely to control velocity decay ("air friction"), and friction against other objects.</p>
+<hr />
+<h3 id="velocity">velocity</h3>
+<pre><code>velocity : { x: 0, y:0 }
+</code></pre>
+<hr />
+<h3 id="isdynamic">isDynamic</h3>
+<pre><code>isDynamic : Boolean
+</code></pre>
+<p>When true, the object reacts to forces (like gravity and impulses). When false, it will stay in place unmovable.</p>
+<hr />
+<h3 id="issolid">isSolid</h3>
+<pre><code>isSolid : Boolean
+</code></pre>
+<p>Solid objects can collide with others. Non solid objects are passable. Either way, onCollision callbacks are always triggered, even when non solid.</p>
+<hr />
+<h3 id="skippedgroups">skippedGroups</h3>
+<pre><code>skippedGroups : Array
+</code></pre>
+<p>List of all skippable groups (all objects of those groups won't trigger collision nor callbacks).</p>
+<hr />
+<h3 id="groupsoncallbacks">groupsOnCallbacks</h3>
+<pre><code>groupsOnCallbacks : Map
+</code></pre>
+<p>An internal map used to hold all the callbacks for this object.</p>
+<hr />
+<h2 id="methods">Methods</h2>
+<hr />
+<h3 id="constructor">constructor ()</h3>
+<pre><code>constructor (group)
+</code></pre>
+<hr />
+<h3 id="destroy">destroy</h3>
+<pre><code>destroy ()
+</code></pre>
+<p>Either this method has to be called in the body to release it inside Physics, or Physics.removeBody(this).</p>
+<hr />
+<h3 id="makecircle">makeCircle</h3>
+<pre><code>makeCircle (x, y, radius)
+</code></pre>
+<p>Helper to quickly create a circular shaped body.</p>
+<hr />
+<h3 id="makerect">makeRect</h3>
+<pre><code>makeRect (x, y, w, h)
+</code></pre>
+<p>Helper to quickly create a rectangular shaped body. Note that rectangle is the shape by default.</p>
+<hr />
+<h3 id="setposition">setPosition</h3>
+<pre><code>setPosition (x, y)
+</code></pre>
+<hr />
+<h3 id="setsize">setSize</h3>
+<pre><code>setSize (w, h)
+</code></pre>
+<hr />
+<h3 id="setradius">setRadius</h3>
+<pre><code>setRadius (r)
+</code></pre>
+<hr />
+<h3 id="skipgroup">skipGroup</h3>
+<pre><code>skipGroup (otherGroup)
+</code></pre>
+<p>Mark <strong>otherGroup</strong> as skippable.</p>
+<hr />
+<h3 id="skipselfgroup">skipSelfGroup</h3>
+<pre><code>skipSelfGroup (flag)
+</code></pre>
+<p>Mark the own group as skippable (for example, avoid entirely collisions between walls in a map).</p>
+<hr />
+<h3 id="unskipgroup">unskipGroup</h3>
+<pre><code>unskipGroup (otherGroup)
+</code></pre>
+<p>Remove <strong>otherGroup</strong> from the list of skippable objects.</p>
+<hr />
+<h3 id="canskip">canSkip</h3>
+<pre><code>canSkip (otherGroup)
+</code></pre>
+<p>Returns <strong>true</strong> if the other group can be skipped. False otherwise.</p>
+<hr />
+<h3 id="oncollision">onCollision</h3>
+<pre><code>onCollision (group, callback)
+</code></pre>
+<p>Setter for a <strong>callback</strong> against the given <strong>group</strong>.
+Example: <code>this.onCollision("coin", this.onGetCoin.bind(this));</code></p>
+<hr />
+<h3 id="intersects">intersects</h3>
+<pre><code>intersects (other)
+</code></pre>
+<p>Returns <strong>collision data</strong> after checking if there is an intersection with <strong>other</strong>.</p>
+<hr />
+<h3 id="processcollision">processCollision</h3>
+<pre><code>processCollision (other, data)
+</code></pre>
+<p>Given the other object and the intersection data, this method calculates the new positions and forces for both of them.    </p>
+<hr />
+<h3 id="execcallback">execCallback</h3>
+<pre><code>execCallback (other)
+</code></pre>
+<p>Execute the callback for the group of the <strong>other</strong> object.</p>
+<hr />
+<h3 id="ispointinside">isPointInside</h3>
+<pre><code>isPointInside (x, y)
+</code></pre>
+<p>Returns whether the given point is inside the Body.</p>
+<hr />
+<h3 id="addimpulse">addImpulse</h3>
+<pre><code>addImpulse (x, y)
+</code></pre>
+<p>Add an ongoing impulse in the direction provided by the vector (x, y). This vector will be divided by this object's <strong>mass</strong>.
+Note that a similar effect can be achieved by setting the velocity directly.</p>
+<hr />
+<h3 id="resetvelocity">resetVelocity</h3>
+<pre><code>resetVelocity ()
+</code></pre>
+<hr />
+<h3 id="update">update</h3>
+<pre><code>update (delta)
+</code></pre>
+<p>If the object is not dynamic, there is no need to update. However it is recommended. If the object was added to Physics, this will be done automatically.    </p>
+<hr />
+<h3 id="drawdebug">drawDebug</h3>
+<pre><code>drawDebug (r, g, b, a)
+</code></pre></div>
+            </div>
+        </div>
+
+        
+
+        <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+        <script src="../../../js/bootstrap-3.0.3.min.js"></script>
+        <script src="../../../js/prettify-1.0.min.js"></script>
+        <script src="../../../js/base.js"></script>
+        <script src="../../../js/main.js"></script>
+    </body>
+</html>

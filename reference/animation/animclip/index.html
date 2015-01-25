@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        
+        
+        
+        <link rel="shortcut icon" href="../../../img/favicon.ico">
+
+	<title>AnimClip - MicronJS</title>
+
+        <link href="../../../css/bootstrap-custom.min.css" rel="stylesheet">
+        <link href="../../../css/font-awesome-4.0.3.css" rel="stylesheet">
+        <link href="../../../css/prettify-1.0.css" rel="stylesheet">
+        <link href="../../../css/base.css" rel="stylesheet">
+        <link href="../../../theme/css/custom.css" rel="stylesheet">
+
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+        <![endif]-->
+    </head>
+
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+
+        <!-- Collapsed navigation -->
+        <div class="navbar-header">
+            <!-- Expander button -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+
+            <!-- Main title -->
+            <a href="../../.." class="pull-left" style="margin-right: 3px">
+                <img src="../../../img/icon_small.png" alt="MicronJS" />
+            </a>
+            <a class="navbar-brand" href="../../..">MicronJS</a>
+        </div>
+
+        <!-- Expanded navigation -->
+        <div class="navbar-collapse collapse">
+            <!-- Main navigation -->
+            <ul class="nav navbar-nav">
+                <li>
+                    <a href="../../../editor">
+                        Editor
+                    </a>
+                </li>
+                <li>
+                    <a href="https://github.com/micronjs/micronjs/wiki">
+                        Wiki
+                    </a>
+                </li>
+            </ul>
+
+            <!-- Search, Navigation and Repo links -->
+            <ul class="nav navbar-nav navbar-right">
+                
+                <li >
+                <a rel="next" href="../animkeycall/">
+                <i class="fa fa-arrow-left"></i> Previous
+                </a>
+                </li>
+                <li >
+                <a rel="prev" href="../animator/">
+                Next <i class="fa fa-arrow-right"></i>
+                </a>
+                </li>
+                
+                <li>
+                    <a href="https://github.com/micronjs/micronjs">
+                        
+                        <i class="fa fa-github"></i>
+                        
+                        GitHub
+                    </a>
+                </li>
+                
+            </ul>
+        </div>
+    </div>
+</div>
+
+        <div class="toc"><ul class="toctree-wrapper current">
+    
+        
+            <li class="toctree-l1 ">
+                <a class="" href="../../..">Home</a>
+                
+            </li>
+        
+    
+        
+            <span>Core</span>
+            
+                <li class="toctree-l2 ">
+                    <a class="" href="../../core/core/">Core</a>
+                    
+                </li>
+            
+                <li class="toctree-l2 ">
+                    <a class="" href="../../core/state/">State</a>
+                    
+                </li>
+            
+                <li class="toctree-l2 ">
+                    <a class="" href="../../core/entity/">Entity</a>
+                    
+                </li>
+            
+                <li class="toctree-l2 ">
+                    <a class="" href="../../core/pool/">Pool</a>
+                    
+                </li>
+            
+        
+    
+        
+            <li class="toctree-l1 ">
+                <a class="" href="../../input/">Input</a>
+                
+            </li>
+        
+    
+        
+            <span>Graphics</span>
+            
+                <li class="toctree-l2 ">
+                    <a class="" href="../../graphics/graphics/">Graphics</a>
+                    
+                </li>
+            
+                <li class="toctree-l2 ">
+                    <a class="" href="../../graphics/camera/">Camera</a>
+                    
+                </li>
+            
+                <li class="toctree-l2 ">
+                    <a class="" href="../../graphics/sprite/">Sprite</a>
+                    
+                </li>
+            
+                <li class="toctree-l2 ">
+                    <a class="" href="../../graphics/atlas/">Atlas</a>
+                    
+                </li>
+            
+                <li class="toctree-l2 ">
+                    <a class="" href="../../graphics/label/">Label</a>
+                    
+                </li>
+            
+                <li class="toctree-l2 ">
+                    <a class="" href="../../graphics/button/">Button</a>
+                    
+                </li>
+            
+                <li class="toctree-l2 ">
+                    <a class="" href="../../graphics/particlebase/">Pariclebase</a>
+                    
+                </li>
+            
+                <li class="toctree-l2 ">
+                    <a class="" href="../../graphics/particlecircle/">ParticleCircle</a>
+                    
+                </li>
+            
+                <li class="toctree-l2 ">
+                    <a class="" href="../../graphics/particlesystem/">ParticleSystem</a>
+                    
+                </li>
+            
+        
+    
+        
+            <span>Physics</span>
+            
+                <li class="toctree-l2 ">
+                    <a class="" href="../../physics/physics/">Physics</a>
+                    
+                </li>
+            
+                <li class="toctree-l2 ">
+                    <a class="" href="../../physics/body/">Body</a>
+                    
+                </li>
+            
+        
+    
+        
+            <span>Animation</span>
+            
+                <li class="toctree-l2 ">
+                    <a class="" href="../animkey/">AnimKey</a>
+                    
+                </li>
+            
+                <li class="toctree-l2 ">
+                    <a class="" href="../animkeycall/">AnimKeyCall</a>
+                    
+                </li>
+            
+                <li class="toctree-l2 current">
+                    <a class="current" href="./">AnimClip</a>
+                    
+                        <ul>
+                        
+                            <li class="toctree-l3"><a href="#animclip-base"> AnimClip: Base</a></li>
+                            
+                                <li><a class="toctree-l4" href="#members">Members</a></li>
+                            
+                                <li><a class="toctree-l4" href="#methods">Methods</a></li>
+                            
+                        
+                        </ul>
+                    
+                </li>
+            
+                <li class="toctree-l2 ">
+                    <a class="" href="../animator/">Animator</a>
+                    
+                </li>
+            
+        
+    
+        
+            <span>Sound</span>
+            
+                <li class="toctree-l2 ">
+                    <a class="" href="../../sound/sound/">Sound</a>
+                    
+                </li>
+            
+                <li class="toctree-l2 ">
+                    <a class="" href="../../sound/song/">Song</a>
+                    
+                </li>
+            
+        
+    
+        
+            <li class="toctree-l1 ">
+                <a class="" href="../../utils/">Utils</a>
+                
+            </li>
+        
+    
+</ul>
+</div>
+
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-9 col-md-offset-3" role="main">
+
+<h1 id="animclip-base"><i class="fa fa-book"></i> AnimClip: Base</h1>
+<p><span class="label label-info">Class</span></p>
+<p>An AnimClip is a single animation: a collection of keyframes. This keyframes are just
+duration values wrapping something that happens to objects: can be done using easing or not.
+Can be a value of a property, or a callback to function. A single animation clip can contain
+the data for a single animation, ie. "walking", "dying", etc.</p>
+<p>Note that the actor defined here is always an string (an id, a name) to make the animclips
+<em>reusable</em> by other entities. This way, the animator can define a new object for the actor
+and still use the data of another actor/entity/object.</p>
+<p>In short: one clip is a single animation. It can animate any object or actor passed and
+can have any number of keyframes. Keyframes can be mixed and disordered in its definition (you can
+mix them up and they will be played still properly following the time they should trigger at).
+Frames can define custom easing functions and you can add AnimKey's or AnimKeyCall's.</p>
+<h2 id="members">Members</h2>
+<hr />
+<h3 id="name">name</h3>
+<pre><code>name : String
+</code></pre>
+<p>The name of the animation.</p>
+<hr />
+<h3 id="loop">loop</h3>
+<pre><code>loop : Boolean
+</code></pre>
+<p>Wheather or not the animation will be looped.</p>
+<hr />
+<h3 id="ease">ease</h3>
+<pre><code>ease : Boolean
+</code></pre>
+<p>When true, the frames will be eased using the defined easing function for each one.
+When false, the frames will not be eased and just "jump" from one to the next.
+AnimKeyCalls are never eased (it just makes no sense. Think about it).</p>
+<hr />
+<h3 id="frames">frames</h3>
+<pre><code>frames : Array
+</code></pre>
+<p>Each one and all of the frames for this clip. Have fun messing with it!</p>
+<hr />
+<h3 id="currenttime">currentTime</h3>
+<pre><code>currentTime : Number
+</code></pre>
+<p>I have no idea why you would want to mess with the current playback time, but here you go.</p>
+<h2 id="methods">Methods</h2>
+<hr />
+<h3 id="constructor">constructor</h3>
+<pre><code>constructor : function(name : String, loop : Boolean, ease : Boolean)
+</code></pre>
+<hr />
+<h3 id="addkey">addKey</h3>
+<pre><code>addKey : function(actor : String, startTime : Number, stopTime : Number, property : String, value : Number, [easing])
+</code></pre>
+<p>Add a new keyframe to this animation clip.  The time is in seconds. For easing functions, check Utils.</p>
+<hr />
+<h3 id="addkeycall">addKeyCall</h3>
+<pre><code>addKeyCall : function(actor : String, time : Number, func : Function, params : Array)
+</code></pre>
+<p>Add a new keyframe function callback. The time is in seconds, the function should not be empty and the array should contain
+the actual parameter values for the callback.</p>
+<p>WARNING: we do not check things here. If the function is empty or the things passed to the function are not ok, it is your fault ;)</p>
+<hr />
+<h3 id="removekeys">removeKeys</h3>
+<pre><code>removeKeys : function(startTime)
+</code></pre>
+<p>TODO</p>
+<hr />
+<h3 id="run">run</h3>
+<pre><code>run : function(delta)
+</code></pre>
+<p>Used internally by the animator. You should never need it, but...</p>
+<hr />
+<h3 id="reset">reset</h3>
+<pre><code>reset : function()
+</code></pre>
+<p>Also used internally by the animator.</p></div>
+            </div>
+        </div>
+
+        
+
+        <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+        <script src="../../../js/bootstrap-3.0.3.min.js"></script>
+        <script src="../../../js/prettify-1.0.min.js"></script>
+        <script src="../../../js/base.js"></script>
+        <script src="../../../js/main.js"></script>
+    </body>
+</html>

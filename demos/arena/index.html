@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>ARENA: a simple FPS.</title>
+        <style>
+            body {background-color:black}
+        </style>
+        <script src="../../build/base.js"></script>
+        <script src="../../build/micron.js"></script>        
+		<script src="js/pointlocker.js"></script>
+    </head>
+    <body>
+		<script type="text/javascript">
+
+		
+// TODO: 
+// add a global object, containing info about: isTarget, current target, etc
+// add an ID to map objects/enemies
+// callback to game when an enemy is killed/object destroyed
+// add objects (exploding barrel, chest, etc)
+// weapons + weapon stuff
+// enemy ai
+// game modes
+// different map sprites
+// FINISH THIS SHIT!
+		
+// Based on this: http://www.playfuljs.com/a-first-person-engine-in-265-lines/
+// And this: http://nicmendoza.github.io/playfuljs-demos/raycaster
+var CIRCLE = Math.PI * 2;
+	  	  
+		  
+var Weapon = Sprite.extend({
+
+	isShooting : false,
+
+	// todo: add values here like recoil, etc
+	constructor : function(img)
+	{
+		this.callParent(img);
+
+		var weaponWidth = 32; //Graphics.width/2; //64;
+		var weaponHeight = 32; //Graphics.height/2; //64;		
+		this.width = weaponWidth;
+		this.height = weaponHeight;
+		this.scale.x = 8;
+		this.scale.y = 8;
+		
+	},
+	
+	draw : function(steps)
+	{
+		if(!this.isShooting)
+		{
+			var bobX = Math.cos(steps * 2) * 6;
+			var bobY = Math.sin(steps * 4) * 6;
+		
+			var left = Graphics.width * 0.80 + bobX; //this.width * 0.55 + bobX;
+			var top = Graphics.height * 0.80 + bobY; //this.height * 0.6 + bobY;
+			//this.ctx.drawImage(weapon.image, left, top, weapon.width * this.scale, weapon.height * this.scale);
+			//Graphics.drawRect(left, top, weaponWidth * this.scale, weaponHeight * this.scale, 1, 1, 1, 1);
+			//console.log(Graphics.getImage("gun1"));
+			//Graphics.drawSprite(Graphics.getImage("gun1"), left, top, weaponWidth, weaponHeight, 0, 8, 8);
+			this.x = left;
+			this.y = top;
+		}
+		this.callParent();
+		//},	
+	},
+	
+	shoot : function()
+	{
+		var recoil = 0;
+		
+		if(!this.isShooting)
+		{
+			this.isShooting = true;
+			
+			this.scale.x = 12;
+			this.scale.y = 12;
+			this.x = Graphics.width * 0.90;
+			//this.y = Graphics.width * 0.84 + Math.sin(4) * 6;
+			
+			Utils.tween(this, "x", Graphics.width * 0.80, 0.15, Utils.E_LINEAR_OUT, this.onEndShooting.bind(this));
+			//Utils.tween(this, "y", Graphics.width * 0.80, 0.18, Utils.E_LINEAR_OUT); //, this.onEndShooting.bind(this));
+			
+			Utils.tween(this.scale, "x", 8, 0.12, Utils.E_LINEAR_OUT, this.onEndShooting.bind(this));
+			Utils.tween(this.scale, "y", 8, 0.13, Utils.E_LINEAR_OUT);
+			
+			Camera.shake(0.1, 4.1);
+			// dispersion factor!
+			recoil = Utils.randRange(-0.016*2, 0.016*4);			
+		}
+		
+		return recoil;
+	},
+	
+	onEndShooting : function()
+	{
+		this.isShooting = false;
+	}
+
+});		  
+
+
+var Player = Entity.extend({
+
+	x : 0,
+	y : 0,
+	direction : 0,
+	weapon : null,
+	steps : 0,
+	map : null,
+	weapon : null,
+	
+	constructor : function(x, y, direction, map)
+	{
+		this.callParent();
+	
+		this.x = x;
+		this.y = y;		
+		this.direction = direction;
+		this.map = map;
+		Input.addInputReceiver(this);
+		this.weapon = new Weapon('gun1');
+    },
+	
+    rotate : function(angle) 
+	{
+		this.direction = (this.direction + angle + CIRCLE) % (CIRCLE);
+	},
+	
+	walk : function(distance, direction) 
+	{
+		var dx = Math.cos(direction) * distance;
+		var dy = Math.sin(direction) * distance;
+		if (this.map.get(this.x + dx, this.y) <= 0) this.x += dx;
+		if (this.map.get(this.x, this.y + dy) <= 0) this.y += dy;
+		this.steps += distance;
+	},
+
+	shoot : function()
+	{
+		/*
+		if(this.isShooting === false)
+		{
+			this.isShooting = true;
+			
+		
+			//this.map.onPlayerShoot(this.x, this.y, this.direction);
+			Camera.shake(0.1, 4.1);
+			// dispersion factor!
+			this.direction += Utils.randRange(-0.016*2, 0.016*4);
+		}
+		*/
+		this.direction += this.weapon.shoot();
+	},
+
+	onClickInput : function(x, y)
+	{
+		if(x > 0 && x < Graphics.width && y > 0 && y < Graphics.height)
+		{		
+			lockPointer(Graphics.canvas, this.onPointerMove.bind(this));
+		}
+		else
+		{
+			pointerRelease();
+		}		
+	},
+	
+	onPointerMove : function(coords)
+	{
+		this.direction -= coords.x * -0.0008; //-0.0030; //-0.0012;
+	},
+
+	update : function(delta)
+	{
+		this.callParent(delta);
+	
+		if (Input.isKeyPressed(Input.KEY_LEFT))		this.rotate(-Math.PI * delta);
+		if (Input.isKeyPressed(Input.KEY_RIGHT)) 	this.rotate(Math.PI * delta);
+		if (Input.isKeyPressed(Input.KEY_W)) 		this.walk(2.5 * delta, this.direction);
+		if (Input.isKeyPressed(Input.KEY_S)) 		this.walk(-2.5 * delta, this.direction);
+		if (Input.isKeyPressed(Input.KEY_A)) 		this.walk(2.5 * delta, this.direction - Math.PI/2);
+		if (Input.isKeyPressed(Input.KEY_D)) 		this.walk(2.5 * delta, this.direction + Math.PI/2);
+		if (Input.isKeyPressed(Input.KEY_SPACE) || Input.isMousePressed())	this.shoot();
+		if (Input.isKeyPressed(Input.KEY_ESC))		pointerRelease()
+		
+		this.weapon.update(delta);		
+	},
+	
+	draw : function()
+	{
+		// todo: hud, weapon!
+		//drawWeapon : function(weapon, steps) 
+		//{
+		this.weapon.draw(this.steps);		
+	}
+});
+	
+	
+var MapObject = Base.extend({
+
+	object : null,
+	x : 0, 
+	y : 0,
+	
+	constructor : function(object, x, y)
+	{
+		object.img = Graphics.getImage(object.texture);
+		for(var prop in object)
+		{
+			this[prop] = object[prop];
+		}
+		this.object = object;
+		this.x = x;
+		this.y = y;
+	}
+});
+
+//-----------------------------------------------------------------------------------------------
+
+var Map = Entity.extend({		  
+
+	size : 16,
+	wallGrid : null,
+	skybox : null,
+	wall : null, //exture
+	wall2 : null, //exture
+	floor : null, //Texture
+	light : 0,
+	objects : null,
+	
+	constructor : function(size)
+	{
+		this.callParent();
+	
+		this.size = size;
+		this.wallGrid = new Uint8Array(size * size);
+		//this.skybox = new Bitmap('img/deathvalley_panorama.jpg', 4000, 1290);
+		//this.wallTexture = new Bitmap('img/wall_texture.jpg', 1024, 1024);
+		//this.floorTexture = new Bitmap('img/floor_texture.jpg', 391,392);
+		
+		this.wall = Graphics.getImage("wall-conc");
+		this.wall2 = Graphics.getImage("wall-conc2");		
+		this.skybox = Graphics.getImage("bgr");
+		
+		this.light = 0;
+		this.objects = [];
+	},
+
+	get : function(x, y) 
+	{
+		x = Math.floor(x);
+		y = Math.floor(y);
+		if (x < 0 || x > this.size - 1 || y < 0 || y > this.size - 1) return -1;
+		return this.wallGrid[y * this.size + x];
+	},
+	
+	getObject : function(x,y) 
+	{
+		x = Math.floor(x);
+		y = Math.floor(y);
+		if (x < 0 || x > this.size - 1 || y < 0 || y > this.size - 1) return null;		
+		return this.objects[y * this.size + x];
+	},	
+
+  	set : function(x, y, value)
+  	{    
+    	if(x >= 0 && x <= this.size && y >= 0 && y <= this.size) this.wallGrid[y * this.size + x] = value;
+    },
+  
+	addObject : function(object, x, y)
+	{
+		this.objects.push( new MapObject(object, x, y) );
+	},
+
+	randomize : function() 
+	{
+		/*
+		for (var i = 0; i < this.size * this.size; i++) 
+		{
+			this.wallGrid[i] = Math.random() < 0.3 ? 1 : 0;
+		}
+		*/
+
+      	for(var i = 0; i < this.size; i++)
+      	{
+       		for(var j = 0; j < this.size; j++)
+       		{
+      			if(i == 0 || i == this.size-1 || j == 0 || j == this.size-1) this.wallGrid[i*this.size+j] = 1;
+       		}       
+      	}     
+      
+        this.set(2, 2, 1);
+        this.set(this.size - 3, 2, 1);      
+        this.set(7, 4, 1);
+        this.set(3, 11, 1);
+        this.set(4, 8, 1);
+        this.set(5, 9, 1);		
+
+	},
+
+	cast : function(point, angle, range, objects) 
+	{
+		var self = this,
+			sin = Math.sin(angle),
+			cos = Math.cos(angle),
+			noWall = {
+				length2: Infinity
+			};
+
+		return ray({
+			x: point.x,
+			y: point.y,
+			height: 0,
+			distance: 0
+		});
+
+		function ray(origin) 
+		{
+			var stepX = step(sin, cos, origin.x, origin.y);
+			var stepY = step(cos, sin, origin.y, origin.x, true);
+			var nextStep = stepX.length2 < stepY.length2 ? inspect(stepX, 1, 0, origin.distance, stepX.y) : inspect(stepY, 0, 1, origin.distance, stepY.x);
+
+			if (nextStep.distance > range) return [origin];    
+			return [origin].concat(ray(nextStep));
+		}
+
+		function step(rise, run, x, y, inverted) 
+		{
+			if (run === 0) return noWall;
+			var dx = run > 0 ? Math.floor(x + 1) - x : Math.ceil(x - 1) - x;
+			var dy = dx * (rise / run);
+			return {
+				x: inverted ? y + dy : x + dx,
+				y: inverted ? x + dx : y + dy,
+				length2: dx * dx + dy * dy
+			};
+		}
+
+		function inspect(step, shiftX, shiftY, distance, offset) 
+		{
+			var dx = cos < 0 ? shiftX : 0;
+			var dy = sin < 0 ? shiftY : 0;
+			step.height = self.get(step.x - dx, step.y - dy);
+			step.distance = distance + Math.sqrt(step.length2);
+			step.object = self.getObject(step.x - dx, step.y - dy);
+			if (shiftX) step.shading = cos < 0 ? 2 : 0;
+			else step.shading = sin < 0 ? 2 : 1;
+			step.offset = offset - Math.floor(offset);
+			return step;
+		}
+	},
+
+	update : function(seconds) 
+	{
+		if (this.light > 0) this.light = Math.max(this.light - 10 * seconds, 0);
+		else if (Math.random() * 5 < seconds) this.light = 2;
+	},
+	
+	draw : function()
+	{
+	}
+
+});
+	
+
+	
+var Renderer = Entity.extend({ 
+
+	resolution : 320,
+	fov : 1.2, // in radians
+	range : 14,
+	lightRange : 5,
+	isTarget : false,	
+	scale : 1,
+
+	constructor : function(resolution, fov)
+	{
+		this.callParent();	
+		this.width = Graphics.width;
+		this.height = Graphics.height;
+		this.resolution = resolution;
+		this.spacing = Graphics.width / resolution;
+		this.fov = fov;
+		//this.scale = (this.width + this.height) / 1200; // 1200????
+		
+		this.ctx = Graphics.context;
+	},
+
+	draw : function(player, map) 
+	{
+		this.drawSky(player.direction, map.skybox, map.light);
+		this.drawColumns(player, map);
+		//this.drawWeapon(player.weapon, player.steps);
+		//this.drawMiniMap(map, player);
+		this.drawCrosshair();
+	},
+	
+	drawSky : function(direction, sky, ambient) 
+	{
+		var width = Graphics.width * (CIRCLE / this.fov);
+		var left = -width * direction / CIRCLE;
+		
+		var grad = this.ctx.createLinearGradient(0, 0, 0, Graphics.height);
+		grad.addColorStop(0, "rgb(105,1,2)");
+		grad.addColorStop(1, "rgb(237, 28, 37)");		
+		this.ctx.fillStyle = grad;
+		this.ctx.fillRect(0, 0, Graphics.width, Graphics.height);		
+				
+		var grad2 = this.ctx.createLinearGradient(0, 0, 0, Graphics.height);
+		grad2.addColorStop(0, "rgb(1, 1, 1)");
+		grad2.addColorStop(1, "rgb(16, 16 ,16)");
+		this.ctx.fillStyle = grad2;
+		this.ctx.fillRect(0, Graphics.height/2, Graphics.width, Graphics.height/2);		
+		
+		Graphics.drawSprite(sky, left, 0, width*2, 1, 0, 1, 1, 0.65); //width, this.height, 0, 1, 1);
+		//Graphics.drawFullScreenRect(0, 0, 0, 0.3);
+		
+	},
+
+	drawColumns : function(player, map/*, objects*/) 
+	{	
+		//this.ctx.save();				
+		var allObjects = [];
+		for (var column = 0; column < this.resolution; column++) 
+		{
+			var angle = this.fov * (column / this.resolution - 0.5);
+			var ray = map.cast(player, player.direction + angle, this.range);
+			var columnProps = this.drawColumn(column, ray, angle, map);
+			allObjects.push(columnProps);
+		}
+		//this.ctx.restore();
+		//this.ctx.save();
+		this.drawSprites(player,map,allObjects);
+		//this.ctx.restore();
+	},
+
+	/*
+	// move this and drawCrosshair to player's hud rendereing
+	drawWeapon : function(weapon, steps) 
+	{
+		var bobX = Math.cos(steps * 2) * this.scale * 6;
+		var bobY = Math.sin(steps * 4) * this.scale * 6;
+		
+		var left = Graphics.width * 0.96 + bobX; //this.width * 0.55 + bobX;
+		var top = Graphics.height * 0.95 + bobY; //this.height * 0.6 + bobY;
+		var weaponWidth = 64; //Graphics.width/2; //64;
+		var weaponHeight = 64; //Graphics.height/2; //64;
+		//this.ctx.drawImage(weapon.image, left, top, weapon.width * this.scale, weapon.height * this.scale);
+		//Graphics.drawRect(left, top, weaponWidth * this.scale, weaponHeight * this.scale, 1, 1, 1, 1);
+		//console.log(Graphics.getImage("gun1"));
+		Graphics.drawSprite(Graphics.getImage("gun1"), left, top, weaponWidth, weaponHeight, 0, 8, 8);
+	},
+	*/
+	
+	drawCrosshair : function()
+	{
+		var size = Utils.scalePercentHeight(1);
+		var centerX = Graphics.width/2;
+		var centerY = Graphics.height/2 + Utils.scalePercentHeight(2);
+		var color = { r:1, g:1, b:1, a:1 };
+		
+		if(this.isTarget)
+		{
+			color.g = color.b = 0;
+			//color.r = 0.0;
+			//color.g = 0.0;
+			//color.b = 0.0;
+			//color.r = 0;
+			//color = { r:1, g:0, b:0, a:1 };
+			//size *= 1.25;
+			//console.log("looool");
+		}
+	
+		Graphics.drawRegularPolygon(centerX, centerY, 6, size, color.r, color.g, color.b, color.a, "stroke");
+	},
+	
+	drawSpriteColumn : function(player,map,column,columnProps,sprites) 
+	{	
+		var ctx = this.ctx,
+			left = Math.floor(column * this.spacing),
+			width = Math.ceil(this.spacing),
+			angle = this.fov * (column / this.resolution - 0.5),
+			columnWidth = this.width / this.resolution + 1,
+			sprite,props,obj,textureX,height,projection, mappedColumnObj,spriteIsInColumn,top;
+
+		//todo: make rays check for objects, and return those that it actually hit
+		//check if ray hit an object
+		//if(!columnProps.objects.length){return;}
+		sprites = sprites.filter(function(sprite)
+		{
+			return !columnProps.hit || sprite.distanceFromPlayer < columnProps.hit;
+		});
+
+		for(var i = 0; i < sprites.length; i++)
+		{
+			sprite = sprites[i];
+			//mappedColumnObj = columnProps.objects.filter(function(obj){
+			//	return sprite === obj.object;
+			//})[0];
+			//if(!mappedColumnObj)return;
+			
+			//determine if sprite should be drawn based on current column position and sprite width
+			spriteIsInColumn =  left > sprite.render.cameraXOffset - ( sprite.render.width / 2 ) && left < sprite.render.cameraXOffset + ( sprite.render.width / 2 );
+			
+			if(spriteIsInColumn)
+			{
+				//var img = Graphics.getImage(sprite.texture); //new Sprite(sprite.texture);				
+				//textureX = Math.floor( sprite.texture.width / sprite.render.numColumns * ( column - sprite.render.firstColumn ) );// ORIGINAL
+				//textureX = Math.floor( img.width / sprite.render.numColumns * ( column - sprite.render.firstColumn ) );				 // LAST WORKING
+				textureX = Math.floor( sprite.img.width / sprite.render.numColumns * ( column - sprite.render.firstColumn ) );				 // LAST WORKING				
+				//textureX = Math.floor( 32 / sprite.render.numColumns * (column - sprite.render.firstColumn) ); // bullshit :D
+
+				//this.ctx.fillStyle = 'blue';
+				//this.ctx.globalAlpha = 1;
+				//this.ctx.fillRect(left, top , 10, sprite.render.height);
+
+				//var brightness = Math.max(sprite.distanceFromPlayer / this.lightRange - map.light, 0) * 100;
+				
+				//Graphics.drawRect(left, sprite.render.top, columnWidth, sprite.render.height, 0.5, 0, 0.8, 1);	// ORIGINAL WORKING			
+				
+				// TODO: PUT THAT 3 AS A PARAMETER
+				if(Math.abs(Graphics.width/2 - left) < 3)
+				{
+					this.isTarget = true; 
+				}
+				
+				//console.log(sprite);asd
+				//var alpha = 1 - (sprite.distanceFromPlayer / 14);
+				
+
+				//Graphics.drawRect(left, sprite.render.top, columnWidth, sprite.render.height, 0, 0, 0, 1);	// ORIGINAL WORKING			
+				Graphics.drawSpriteCropped(sprite.img, left, sprite.render.top, columnWidth, sprite.render.height, 0, 1, 1, 1.0, textureX, 0, 1, sprite.img.height);
+				//Graphics.drawSprite(img, left, sprite.render.top, columnWidth, sprite.render.height, 0, 1, 1);
+				//ctx.drawImage(sprite.texture.image, textureX, 0, 1, sprite.texture.height, left, sprite.render.top, width, sprite.render.height);						
+				//ctx.fillRect(left, sprite.render.top, columnWidth, sprite.render.height);
+			}			
+		};
+	},
+
+	drawSprites : function(player,map,columnProps)
+	{
+		var screenWidth = this.width,
+			screenHeight = this.height,
+			screenRatio = screenWidth / this.fov,
+			resolution = this.resolution;
+
+		//probably should get these and pass them in, but modifying originals for now
+		// also this limits size of world
+
+		// calculate each sprite distance to player
+		this.setSpriteDistances(map.objects, player);
+
+		var sprites = Array.prototype.slice.call(map.objects).map(function(sprite)
+		{
+			var distX = sprite.x - player.x,
+				distY = sprite.y - player.y,
+				width = sprite.width * screenWidth / sprite.distanceFromPlayer,
+				height = sprite.height * screenHeight /  sprite.distanceFromPlayer,
+				//renderedFloorOffset = sprite.floorOffset / sprite.distanceFromPlayer,
+				angleToPlayer = Math.atan2(distY,distX),
+				angleRelativeToPlayerView = player.direction - angleToPlayer,
+				top = (screenHeight / 2) * (1 + 1 / sprite.distanceFromPlayer) - height;
+
+			if(angleRelativeToPlayerView >= CIRCLE / 2)
+			{
+				angleRelativeToPlayerView -= CIRCLE;    
+			}
+
+			var cameraXOffset = ( Graphics.width / 2 ) - (screenRatio * angleRelativeToPlayerView),
+				numColumns = width / screenWidth * resolution,
+				firstColumn = Math.floor( (cameraXOffset - width/2 ) / screenWidth * resolution);
+
+			sprite.distanceFromPlayer = Math.sqrt( Math.pow( distX, 2) + Math.pow( distY, 2) );
+			sprite.render = {
+				width: width,
+				height: height,
+				angleToPlayer: angleRelativeToPlayerView,
+				cameraXOffset: cameraXOffset,
+				distanceFromPlayer: sprite.distanceFromPlayer,
+				numColumns: numColumns,
+				firstColumn: firstColumn,
+				top: top
+			};
+			return sprite;
+		})
+		// sort sprites in distance order
+		.sort(function(a,b)
+		{
+			if(a.distanceFromPlayer < b.distanceFromPlayer)
+			{
+				return 1;
+			}
+			if(a.distanceFromPlayer > b.distanceFromPlayer)
+			{
+				return -1;
+			}
+			return 0;
+		});
+
+		this.isTarget = false;
+		for (var column = 0; column < this.resolution; column++) 
+		{
+			this.drawSpriteColumn(player, map, column, columnProps[column], sprites);
+		}
+	},
+
+	setSpriteDistances : function(objects, player)
+	{
+		for(i = 0; i < objects.length; i++)
+		{
+			obj = objects[i];
+		}
+	},
+	
+	drawColumn : function(column, ray, angle, map) 
+	{
+		var //ctx = this.ctx,
+			//wallTexture = map.wallTexture,
+			//floorTexture = map.floorTexture,
+			left = Math.floor(column * this.spacing),
+			width = Math.ceil(this.spacing),
+			hit = -1,
+			objects = [],
+			hitDistance;
+
+		while (++hit < ray.length && ray[hit].height <= 0);
+
+		for (var s = ray.length - 1; s >= 0; s--) {
+			var step = ray[s];
+			//var rainDrops = Math.pow(Math.random(), 3) * s;
+			//var rain = (rainDrops > 0) && this.project(0.1, angle, step.distance),
+			/*textureX,*/
+			var wall;
+
+			if (s === hit) 
+			{	
+				//console.log(map.get(Math.floor(ray[hit].x), Math.floor(ray[hit].y)));					
+				//console.log(this.wall);
+				textureX = Math.floor(map.wall.width * step.offset);
+				wall = this.project(step.height, angle, step.distance);
+				//ctx.drawImage(wallTexture.image, textureX, 0, 1, wallTexture.height, left, wall.top, width, wall.height);
+				//ctx.globalAlpha = Math.max((step.distance + step.shading) / this.lightRange - map.light, 0);
+				//var alpha = Math.max((step.distance + step.shading) / this.lightRange - map.light, 0);				
+				var alpha = 1 - (step.distance / 14);
+				//var alpha = 1;
+				//var w = Utils.scalePercentWidth(0.5);
+				//Graphics.drawRect(left, wall.top, w, w/4, 1, 1, 1, 1);
+				//Graphics.drawRect(left, wall.top+wall.height, w, w/4, 1, 1, 1, 1);
+				
+				Graphics.drawRect(left, wall.top, width, wall.height, 0, 0, 0, 1.0); // original working				
+				Graphics.drawSpriteCropped(map.wall, left, wall.top, width, wall.height, 0, 1, 1, alpha, textureX, 0, 1, map.wall.height);
+
+				// GROUND REFLECTIONS!
+				Graphics.drawSpriteCropped(map.wall, left, wall.top, width, wall.height*2, 0, 1, 1, 0.022, textureX, 0, 1, map.wall.height);
+				
+				hitDistance = step.distance;
+			} 
+			else if(step.object)
+			{
+				objects.push({
+					object: step.object,
+					distance: step.distance,
+					offset: step.offset,
+					angle: angle
+				});
+			}
+			//ctx.fillStyle = '#ffffff';
+			//ctx.globalAlpha = 0.15;
+			//while (--rainDrops > 0) ctx.fillRect(left, Math.random() * rain.top, 1, rain.height);
+		}
+	
+		var ret = {	objects: objects, hit: hitDistance };
+		return ret;
+	},
+
+	project : function(height, angle, distance) 
+	{
+		var z = distance * Math.cos(angle);
+		var wallHeight = this.height * height / z;
+		var bottom = this.height / 2 * (1 + 1 / z);
+		return {
+			top: bottom - wallHeight,
+			height: wallHeight
+		};
+	},
+
+	projectSprite : function(height, distance) 
+	{
+		var z = distance;
+		var wallHeight = this.height * height / z;
+		var bottom = this.height / 2 * (1 + 1 / z);
+		return {
+			top: bottom - wallHeight,
+			height: wallHeight
+		};
+	}
+
+});
+		  
+/*
+var ObjectsManager = Entity.extend({
+
+	collection : null,
+
+	constructor : function()
+	{
+		this.callParent();
+		this.collection = [];
+	},
+
+	update : function(delta)
+	{
+		this.callParent(delta);
+		
+		map.objects.forEach(function(item)
+		{
+			//item.logic && item.logic();
+			// execute update or whatever
+		});
+	}
+});
+*/
+		  
+//-----------------------------------------------------------------------------------------------
+
+
+var StateGame = State.extend({
+	
+	renderer : null,
+	map : null,
+	player : null,
+		
+    constructor : function()
+    {
+        this.callParent();
+        //Camera.fade( {r:0, g:0, b:0, a:1}, {r:0, g:0, b:0, a:0}, 5);
+		Graphics.autoClearScreen = true;
+		Graphics.pixelify(true);
+    },
+
+	init : function ()
+	{
+		this.callParent();
+
+		this.renderer = new Renderer(160, 1.2);
+		this.map = new Map(12);
+		this.map.randomize();
+		this.player = new Player(8.3, 8.2, Math.PI - 0.3);		
+		this.player.map = this.map;
+		
+		this.map.addObject(
+		{
+				//color: 'brown',
+				//texture: new Bitmap('img/cowboy.png', 639, 1500),
+				texture: "enemy",
+				height: 1,
+				width: 1,
+				//floorOffset: 10,
+				speed: 0.1,
+		}, 7, 7);		
+		
+		this.map.addObject(
+		{
+				//color: 'brown',
+				//texture: new Bitmap('img/cowboy.png', 639, 1500),
+				texture: "enemy",
+				height: 1,
+				width: 1,
+				//floorOffset: 10,
+				speed: 0.1,
+		}, 3, 7);		
+		
+	},
+	
+	//onPause : function(flag)
+	//{
+	//	this.callParent(flag);		
+	//},
+	
+	update : function (delta)
+	{
+		this.callParent(delta);		
+		
+		this.player.update(delta);
+      	this.map.update(delta);			
+	},
+	
+	draw : function()
+	{
+		this.callParent();		
+		//Graphics.drawFullScreenRect(0.5, 0.5, 0.5, 0.1);
+		this.renderer.draw(this.player, this.map);	
+		this.player.draw();
+	}
+	
+});
+
+Core.init(640, 480); 
+//Core.init(320, 480); 
+Core.setState(new StateGame());
+Core.addAsset([ "enemy", 		"gfx/enemy1.png",
+				"gun1", 		"gfx/gun1.png",
+				"wall-conc",	"gfx/wall-conc.jpg", // ]);
+				"wall-conc2",	"gfx/wall-conc2.jpg", // ]);				
+				"bgr",			"gfx/bgr.jpg" ]);
+Core.loadAndRun();
+
+        </script>
+    </body>
+</html>

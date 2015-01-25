@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        
+        
+        
+        <link rel="shortcut icon" href="../../../img/favicon.ico">
+
+	<title>ParticleSystem - MicronJS</title>
+
+        <link href="../../../css/bootstrap-custom.min.css" rel="stylesheet">
+        <link href="../../../css/font-awesome-4.0.3.css" rel="stylesheet">
+        <link href="../../../css/prettify-1.0.css" rel="stylesheet">
+        <link href="../../../css/base.css" rel="stylesheet">
+        <link href="../../../theme/css/custom.css" rel="stylesheet">
+
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+        <![endif]-->
+    </head>
+
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+
+        <!-- Collapsed navigation -->
+        <div class="navbar-header">
+            <!-- Expander button -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+
+            <!-- Main title -->
+            <a href="../../.." class="pull-left" style="margin-right: 3px">
+                <img src="../../../img/icon_small.png" alt="MicronJS" />
+            </a>
+            <a class="navbar-brand" href="../../..">MicronJS</a>
+        </div>
+
+        <!-- Expanded navigation -->
+        <div class="navbar-collapse collapse">
+            <!-- Main navigation -->
+            <ul class="nav navbar-nav">
+                <li>
+                    <a href="../../../editor">
+                        Editor
+                    </a>
+                </li>
+                <li>
+                    <a href="https://github.com/micronjs/micronjs/wiki">
+                        Wiki
+                    </a>
+                </li>
+            </ul>
+
+            <!-- Search, Navigation and Repo links -->
+            <ul class="nav navbar-nav navbar-right">
+                
+                <li >
+                <a rel="next" href="../particlecircle/">
+                <i class="fa fa-arrow-left"></i> Previous
+                </a>
+                </li>
+                <li >
+                <a rel="prev" href="../../physics/physics/">
+                Next <i class="fa fa-arrow-right"></i>
+                </a>
+                </li>
+                
+                <li>
+                    <a href="https://github.com/micronjs/micronjs">
+                        
+                        <i class="fa fa-github"></i>
+                        
+                        GitHub
+                    </a>
+                </li>
+                
+            </ul>
+        </div>
+    </div>
+</div>
+
+        <div class="toc"><ul class="toctree-wrapper current">
+    
+        
+            <li class="toctree-l1 ">
+                <a class="" href="../../..">Home</a>
+                
+            </li>
+        
+    
+        
+            <span>Core</span>
+            
+                <li class="toctree-l2 ">
+                    <a class="" href="../../core/core/">Core</a>
+                    
+                </li>
+            
+                <li class="toctree-l2 ">
+                    <a class="" href="../../core/state/">State</a>
+                    
+                </li>
+            
+                <li class="toctree-l2 ">
+                    <a class="" href="../../core/entity/">Entity</a>
+                    
+                </li>
+            
+                <li class="toctree-l2 ">
+                    <a class="" href="../../core/pool/">Pool</a>
+                    
+                </li>
+            
+        
+    
+        
+            <li class="toctree-l1 ">
+                <a class="" href="../../input/">Input</a>
+                
+            </li>
+        
+    
+        
+            <span>Graphics</span>
+            
+                <li class="toctree-l2 ">
+                    <a class="" href="../graphics/">Graphics</a>
+                    
+                </li>
+            
+                <li class="toctree-l2 ">
+                    <a class="" href="../camera/">Camera</a>
+                    
+                </li>
+            
+                <li class="toctree-l2 ">
+                    <a class="" href="../sprite/">Sprite</a>
+                    
+                </li>
+            
+                <li class="toctree-l2 ">
+                    <a class="" href="../atlas/">Atlas</a>
+                    
+                </li>
+            
+                <li class="toctree-l2 ">
+                    <a class="" href="../label/">Label</a>
+                    
+                </li>
+            
+                <li class="toctree-l2 ">
+                    <a class="" href="../button/">Button</a>
+                    
+                </li>
+            
+                <li class="toctree-l2 ">
+                    <a class="" href="../particlebase/">Pariclebase</a>
+                    
+                </li>
+            
+                <li class="toctree-l2 ">
+                    <a class="" href="../particlecircle/">ParticleCircle</a>
+                    
+                </li>
+            
+                <li class="toctree-l2 current">
+                    <a class="current" href="./">ParticleSystem</a>
+                    
+                        <ul>
+                        
+                            <li class="toctree-l3"><a href="#particlesystem-pool"> ParticleSystem : Pool</a></li>
+                            
+                                <li><a class="toctree-l4" href="#methods">Methods</a></li>
+                            
+                        
+                        </ul>
+                    
+                </li>
+            
+        
+    
+        
+            <span>Physics</span>
+            
+                <li class="toctree-l2 ">
+                    <a class="" href="../../physics/physics/">Physics</a>
+                    
+                </li>
+            
+                <li class="toctree-l2 ">
+                    <a class="" href="../../physics/body/">Body</a>
+                    
+                </li>
+            
+        
+    
+        
+            <span>Animation</span>
+            
+                <li class="toctree-l2 ">
+                    <a class="" href="../../animation/animkey/">AnimKey</a>
+                    
+                </li>
+            
+                <li class="toctree-l2 ">
+                    <a class="" href="../../animation/animkeycall/">AnimKeyCall</a>
+                    
+                </li>
+            
+                <li class="toctree-l2 ">
+                    <a class="" href="../../animation/animclip/">AnimClip</a>
+                    
+                </li>
+            
+                <li class="toctree-l2 ">
+                    <a class="" href="../../animation/animator/">Animator</a>
+                    
+                </li>
+            
+        
+    
+        
+            <span>Sound</span>
+            
+                <li class="toctree-l2 ">
+                    <a class="" href="../../sound/sound/">Sound</a>
+                    
+                </li>
+            
+                <li class="toctree-l2 ">
+                    <a class="" href="../../sound/song/">Song</a>
+                    
+                </li>
+            
+        
+    
+        
+            <li class="toctree-l1 ">
+                <a class="" href="../../utils/">Utils</a>
+                
+            </li>
+        
+    
+</ul>
+</div>
+
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-9 col-md-offset-3" role="main">
+
+<h1 id="particlesystem-pool"><i class="fa fa-book"></i> ParticleSystem : Pool</h1>
+<p><span class="label label-info">Class</span></p>
+<p>The ParticleSystem is the class controlling a bunch of particles: it decides how, when and how many particles spawn. 
+Actually, that's you.
+As you see, the ParticleSystem is a Pool object, in order to reuse the same particles as much as possible.
+<strong>IMPORTANT</strong>: remember adding a base object to pool (<em>addToPool</em>) BEFORE spawning. Just like any other pool.</p>
+<hr />
+<h2 id="methods">Methods</h2>
+<hr />
+<h3 id="constructor">constructor</h3>
+<pre><code>constructor ()
+</code></pre>
+<hr />
+<h3 id="spawn">spawn</h3>
+<pre><code>spawn (x, y, amount)
+</code></pre></div>
+            </div>
+        </div>
+
+        
+
+        <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+        <script src="../../../js/bootstrap-3.0.3.min.js"></script>
+        <script src="../../../js/prettify-1.0.min.js"></script>
+        <script src="../../../js/base.js"></script>
+        <script src="../../../js/main.js"></script>
+    </body>
+</html>

@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        
+        
+        
+        <link rel="shortcut icon" href="../../../img/favicon.ico">
+
+	<title>Core - MicronJS</title>
+
+        <link href="../../../css/bootstrap-custom.min.css" rel="stylesheet">
+        <link href="../../../css/font-awesome-4.0.3.css" rel="stylesheet">
+        <link href="../../../css/prettify-1.0.css" rel="stylesheet">
+        <link href="../../../css/base.css" rel="stylesheet">
+        <link href="../../../theme/css/custom.css" rel="stylesheet">
+
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+        <![endif]-->
+    </head>
+
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+
+        <!-- Collapsed navigation -->
+        <div class="navbar-header">
+            <!-- Expander button -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+
+            <!-- Main title -->
+            <a href="../../.." class="pull-left" style="margin-right: 3px">
+                <img src="../../../img/icon_small.png" alt="MicronJS" />
+            </a>
+            <a class="navbar-brand" href="../../..">MicronJS</a>
+        </div>
+
+        <!-- Expanded navigation -->
+        <div class="navbar-collapse collapse">
+            <!-- Main navigation -->
+            <ul class="nav navbar-nav">
+                <li>
+                    <a href="../../../editor">
+                        Editor
+                    </a>
+                </li>
+                <li>
+                    <a href="https://github.com/micronjs/micronjs/wiki">
+                        Wiki
+                    </a>
+                </li>
+            </ul>
+
+            <!-- Search, Navigation and Repo links -->
+            <ul class="nav navbar-nav navbar-right">
+                
+                <li >
+                <a rel="next" href="../../..">
+                <i class="fa fa-arrow-left"></i> Previous
+                </a>
+                </li>
+                <li >
+                <a rel="prev" href="../state/">
+                Next <i class="fa fa-arrow-right"></i>
+                </a>
+                </li>
+                
+                <li>
+                    <a href="https://github.com/micronjs/micronjs">
+                        
+                        <i class="fa fa-github"></i>
+                        
+                        GitHub
+                    </a>
+                </li>
+                
+            </ul>
+        </div>
+    </div>
+</div>
+
+        <div class="toc"><ul class="toctree-wrapper current">
+    
+        
+            <li class="toctree-l1 ">
+                <a class="" href="../../..">Home</a>
+                
+            </li>
+        
+    
+        
+            <span>Core</span>
+            
+                <li class="toctree-l2 current">
+                    <a class="current" href="./">Core</a>
+                    
+                        <ul>
+                        
+                            <li class="toctree-l3"><a href="#core"> Core</a></li>
+                            
+                                <li><a class="toctree-l4" href="#members">Members</a></li>
+                            
+                                <li><a class="toctree-l4" href="#methods">Methods</a></li>
+                            
+                        
+                        </ul>
+                    
+                </li>
+            
+                <li class="toctree-l2 ">
+                    <a class="" href="../state/">State</a>
+                    
+                </li>
+            
+                <li class="toctree-l2 ">
+                    <a class="" href="../entity/">Entity</a>
+                    
+                </li>
+            
+                <li class="toctree-l2 ">
+                    <a class="" href="../pool/">Pool</a>
+                    
+                </li>
+            
+        
+    
+        
+            <li class="toctree-l1 ">
+                <a class="" href="../../input/">Input</a>
+                
+            </li>
+        
+    
+        
+            <span>Graphics</span>
+            
+                <li class="toctree-l2 ">
+                    <a class="" href="../../graphics/graphics/">Graphics</a>
+                    
+                </li>
+            
+                <li class="toctree-l2 ">
+                    <a class="" href="../../graphics/camera/">Camera</a>
+                    
+                </li>
+            
+                <li class="toctree-l2 ">
+                    <a class="" href="../../graphics/sprite/">Sprite</a>
+                    
+                </li>
+            
+                <li class="toctree-l2 ">
+                    <a class="" href="../../graphics/atlas/">Atlas</a>
+                    
+                </li>
+            
+                <li class="toctree-l2 ">
+                    <a class="" href="../../graphics/label/">Label</a>
+                    
+                </li>
+            
+                <li class="toctree-l2 ">
+                    <a class="" href="../../graphics/button/">Button</a>
+                    
+                </li>
+            
+                <li class="toctree-l2 ">
+                    <a class="" href="../../graphics/particlebase/">Pariclebase</a>
+                    
+                </li>
+            
+                <li class="toctree-l2 ">
+                    <a class="" href="../../graphics/particlecircle/">ParticleCircle</a>
+                    
+                </li>
+            
+                <li class="toctree-l2 ">
+                    <a class="" href="../../graphics/particlesystem/">ParticleSystem</a>
+                    
+                </li>
+            
+        
+    
+        
+            <span>Physics</span>
+            
+                <li class="toctree-l2 ">
+                    <a class="" href="../../physics/physics/">Physics</a>
+                    
+                </li>
+            
+                <li class="toctree-l2 ">
+                    <a class="" href="../../physics/body/">Body</a>
+                    
+                </li>
+            
+        
+    
+        
+            <span>Animation</span>
+            
+                <li class="toctree-l2 ">
+                    <a class="" href="../../animation/animkey/">AnimKey</a>
+                    
+                </li>
+            
+                <li class="toctree-l2 ">
+                    <a class="" href="../../animation/animkeycall/">AnimKeyCall</a>
+                    
+                </li>
+            
+                <li class="toctree-l2 ">
+                    <a class="" href="../../animation/animclip/">AnimClip</a>
+                    
+                </li>
+            
+                <li class="toctree-l2 ">
+                    <a class="" href="../../animation/animator/">Animator</a>
+                    
+                </li>
+            
+        
+    
+        
+            <span>Sound</span>
+            
+                <li class="toctree-l2 ">
+                    <a class="" href="../../sound/sound/">Sound</a>
+                    
+                </li>
+            
+                <li class="toctree-l2 ">
+                    <a class="" href="../../sound/song/">Song</a>
+                    
+                </li>
+            
+        
+    
+        
+            <li class="toctree-l1 ">
+                <a class="" href="../../utils/">Utils</a>
+                
+            </li>
+        
+    
+</ul>
+</div>
+
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-9 col-md-offset-3" role="main">
+
+<h1 id="core"><i class="fa fa-book"></i> Core</h1>
+<p><span class="label label-warning">Singleton</span> </p>
+<p>The Core is the... core of the framework: it links all the submodules together. 
+This is the one that controls the actual game and the state machine.
+You won't likely have to modify this class.</p>
+<h2 id="members">Members</h2>
+<hr />
+<h3 id="currentstate">currentState</h3>
+<pre><code>currentState : State
+</code></pre>
+<p>The current <a href="../state/">State</a> in execution.</p>
+<hr />
+<h3 id="width">width</h3>
+<pre><code>width : Number
+</code></pre>
+<p><span class="label label-danger">read-only</span> </p>
+<hr />
+<h3 id="height">height</h3>
+<pre><code>height : Number
+</code></pre>
+<p><span class="label label-danger">read-only</span></p>
+<hr />
+<h3 id="isstorageavailable">isStorageAvailable</h3>
+<pre><code>isStorageAvailable : Boolean
+</code></pre>
+<p><span class="label label-danger">read-only</span> If localStorage is available, this flag is true.</p>
+<hr />
+<h3 id="fps">fps</h3>
+<pre><code>fps : Number
+</code></pre>
+<p><span class="label label-danger">read-only</span> Mean of frames per second in the last second.</p>
+<hr />
+<h3 id="totaltime">totalTime</h3>
+<pre><code>totalTime : Number
+</code></pre>
+<p>Total time elapsed since the game started. Only counts when the game is not paused.</p>
+<hr />
+<h3 id="delta">delta</h3>
+<pre><code>delta : Number
+</code></pre>
+<p><span class="label label-danger">read-only</span> The delta time between this frame and the previous one.</p>
+<hr />
+<h3 id="timescale">timeScale</h3>
+<pre><code>timeScale : Number
+</code></pre>
+<p>This value controls how fast or slow things are updated. 1.0 is the default value.</p>
+<p><strong>NOTE</strong>: Bigger values will make things move faster, smaller values will make it move slower. 0 is totally paused.</p>
+<hr />
+<h3 id="ispaused">isPaused</h3>
+<pre><code>isPaused : Boolean
+</code></pre>
+<p>When this is <strong>true</strong>, the game is paused. False otherwise. Do not attempt to set this manually to pause the game, 
+you must use <a href="./">Core.pause</a> instead.</p>
+<hr />
+<h3 id="assets">assets</h3>
+<pre><code>assets : Object
+</code></pre>
+<p>All the assets loaded. Kept in case someone wants just to iterate through assets quickly. 
+There is a map version available, smartly named assetsMap.</p>
+<hr />
+<h3 id="assetsloaded">assetsLoaded</h3>
+<pre><code>assetsLoaded : Number
+</code></pre>
+<p>The amount of assets loaded at any given time. When core executes init in your gamestate, this should be &gt;= assets.length.</p>
+<hr />
+<h2 id="methods">Methods</h2>
+<hr />
+<h3 id="init">init</h3>
+<pre><code>init (width, height)
+</code></pre>
+<p>Pass the size the game should have on the screen. It will be rescaled and recentered automatically.</p>
+<hr />
+<h3 id="update">update</h3>
+<pre><code>update (delta)
+</code></pre>
+<p>Everything is updated from here: the gamestate, the fps counter, the tweens, etc. This is the source of them all.</p>
+<hr />
+<h3 id="draw">draw</h3>
+<pre><code>draw ()
+</code></pre>
+<p>Like update, draw is the source method for all draw calls to happen in micron. 
+If you need to do weird interstate drawing, pause or similar, this is your place.</p>
+<hr />
+<h3 id="run">run</h3>
+<pre><code>run ()
+</code></pre>
+<p>An internal function, this is called by requestAnimFrame to update and draw everything. This is the heart of the loop.</p>
+<hr />
+<h3 id="pause">pause</h3>
+<pre><code>pause (flag : Boolean)
+</code></pre>
+<p>A handy method for pausing the game from code.    </p>
+<hr />
+<h3 id="setstate">setState</h3>
+<pre><code>setState (state)
+</code></pre>
+<p>Switch the current state. It will delete the previous one, but not the underlaying assets in Core - you have to wipe them manually.</p>
+<hr />
+<h3 id="getfps">getFPS</h3>
+<pre><code>getFPS ()
+</code></pre>
+<p>Return the current internal fps amount. Note that this is a bit innacurate. </p>
+<hr />
+<h3 id="addasset">addAsset</h3>
+<pre><code>addAsset (pathOrArray)
+</code></pre>
+<p>Example: <code>Core.addAsset([ "empty", "gfx/empty.jpg" ]);</code> The first parameter is the <strong>key</strong>, the second, the path.</p>
+<hr />
+<h3 id="loadandrun">loadAndRun</h3>
+<pre><code>loadAndRun ()
+</code></pre>
+<p>Call after adding all your assets to start executing the current state.
+You can also call this without loading any asset - it will just start running your app/game/thing.</p>
+<hr />
+<h3 id="hasstoragesupport">hasStorageSupport</h3>
+<pre><code>hasStorageSupport ()
+</code></pre>
+<p>Returns <strong>true</strong> if your browser supports local storage.</p>
+<hr />
+<h3 id="savetostorage">saveToStorage</h3>
+<pre><code>saveToStorage (name, value)
+</code></pre>
+<p>A simple way to save things to local storage. Example: <code>Core.saveToStorage( "MyPlayer", { x: 10, y: 20, name: "Hodor" } ]);</code>    </p>
+<hr />
+<h3 id="readfromstorage">readFromStorage</h3>
+<pre><code>readFromStorage (name)
+</code></pre>
+<p>Returns the object/value by that name. If nothing is found by that name key, it returns <strong>null</strong>.</p></div>
+            </div>
+        </div>
+
+        
+
+        <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+        <script src="../../../js/bootstrap-3.0.3.min.js"></script>
+        <script src="../../../js/prettify-1.0.min.js"></script>
+        <script src="../../../js/base.js"></script>
+        <script src="../../../js/main.js"></script>
+    </body>
+</html>
